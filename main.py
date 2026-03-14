@@ -55,7 +55,7 @@ def add_note():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-if __name_ == "__main__":
+if _name_ == "_main_":
     # Cloud Run passes the port to use in the PORT environment variable.
     # We default to 8080 for local testing.
     port = int(os.environ.get('PORT', 8080))
