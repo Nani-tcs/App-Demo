@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 from google.cloud import firestore
 
 # Initialize Flask app
-app = Flask(_name_)
+app = Flask(__name__)
 
 # Initialize Firestore Client
 # It will automatically use the project ID from the environment
