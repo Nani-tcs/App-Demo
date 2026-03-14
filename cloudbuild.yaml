@@ -1,13 +1,13 @@
 steps:
-  # Step 1: Build using the Git Short SHA as the tag
+  # Step 1: Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/demonotes-app:$SHORT_SHA', '.']
 
-  # Step 2: Push
+  # Step 2: Push the image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/demonotes-app:$SHORT_SHA']
 
-  # Step 3: Deploy
+  # Step 3: Deploy the image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
@@ -20,6 +20,10 @@ steps:
       - 'us-central1'
       - '--allow-unauthenticated'
 
-# This enables the "Images" tab in Cloud Build history
+# Images to be tracked in the Cloud Build UI
 images:
   - 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/demonotes-app:$SHORT_SHA'
+
+# This is the "Logging Fix" section
+options:
+  logging: CLOUD_LOGGING_ONLY
