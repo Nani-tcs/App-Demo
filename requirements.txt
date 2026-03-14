@@ -1,4 +1,3 @@
-flask
-google-cloud-firestore
-gunicorn
-pytest
+flask==2.0.2
+google-cloud-firestore==2.4.0
+gunicorn==20.1.0
